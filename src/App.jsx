@@ -2,10 +2,10 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import * as Tone from 'tone';
 import { useContext } from 'react';
 import { MusicalKeyContext } from './contexts/MusicalKeyContext.jsx';
 import { KeyDisplay } from './components/KeyDisplay.jsx';
+import { KeyTonicPlayer } from './components/KeyTonicPlayer.jsx';
 
 function App() {
   const { musicalKey, updateMusicalKey } = useContext(MusicalKeyContext);
@@ -25,6 +25,7 @@ function App() {
       <button></button>
       <h1>Key is {musicalKey}. Key Letter is  {musicalKey.split(' ')[0]}.</h1>
       <KeyDisplay />
+      <KeyTonicPlayer />
       <div className='card'>
         <button onClick={() => setCount(count => count + 1)}>count is {count}</button>
         <p>
