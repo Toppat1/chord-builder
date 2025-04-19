@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { MusicalKeyContext } from '../contexts/MusicalKeyContext';
+import { useMusicalKey } from '../contexts/MusicalKeyContext';
 
 export function KeyChanger() {
-  const { musicalKey, updateMusicalKey } = useContext(MusicalKeyContext);
+  const { musicalKey, updateMusicalKey } = useMusicalKey();
   const keyNote = musicalKey.split(' ')[0];
   const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 

@@ -1,12 +1,11 @@
-import { useContext } from 'react';
-import { MusicalKeyContext } from '../contexts/MusicalKeyContext';
+import { useMusicalKey } from '../contexts/MusicalKeyContext';
 import { useSynth } from '../contexts/SynthContext';
 import * as Tone from 'tone';
 
 export function KeyTonicPlayer() {
   const synth = useSynth();
 
-  const { musicalKey } = useContext(MusicalKeyContext);
+  const { musicalKey } = useMusicalKey();
   const keyNote = musicalKey.split(' ')[0];
 
   async function playKeyTonic() {

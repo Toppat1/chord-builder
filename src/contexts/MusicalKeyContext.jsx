@@ -13,3 +13,8 @@ export function MusicalKeyProvider({ children }) {
 
   return <MusicalKeyContext.Provider value={{ musicalKey, updateMusicalKey }}> {children} </MusicalKeyContext.Provider>;
 }
+
+// Create custom hook to get and update key from any component
+export function useMusicalKey() {
+  return useContext(MusicalKeyContext);
+}

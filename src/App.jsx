@@ -9,7 +9,7 @@ import { KeyTonicPlayer } from './components/KeyTonicPlayer.jsx';
 import { KeyChanger } from './components/KeyChanger.jsx';
 
 function App() {
-  const { musicalKey, updateMusicalKey } = useContext(MusicalKeyContext);
+  const { musicalKey } = useContext(MusicalKeyContext);
   const [count, setCount] = useState(0);
 
   return (
@@ -21,6 +21,9 @@ function App() {
         <a href='https://react.dev' target='_blank'>
           <img src={reactLogo} className='logo react' alt='React logo' />
         </a>
+        {
+          //<img src={image} alt='alt-text' style={{width:'300px', height:'auto'}}/>
+        }
       </div>
       <h1>
         Vite + React = Bababooey. This is so sick. <br />

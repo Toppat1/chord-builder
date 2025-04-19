@@ -1,8 +1,7 @@
-import { useContext } from 'react';
-import { MusicalKeyContext } from '../contexts/MusicalKeyContext';
+import { useMusicalKey } from '../contexts/MusicalKeyContext';
 
 export function KeyDisplay() {
-  const { musicalKey } = useContext(MusicalKeyContext);
+  const { musicalKey } = useMusicalKey();
 
   return <button>{musicalKey}</button>;
 }
