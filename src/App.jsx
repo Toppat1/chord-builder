@@ -2,14 +2,13 @@ import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
-import { useContext } from 'react';
-import { MusicalKeyContext } from './contexts/MusicalKeyContext.jsx';
+import { useMusicalKey } from './contexts/MusicalKeyContext.jsx';
 import { KeyDisplay } from './components/KeyDisplay.jsx';
 import { KeyTonicPlayer } from './components/KeyTonicPlayer.jsx';
 import { KeyChanger } from './components/KeyChanger.jsx';
 
 function App() {
-  const { musicalKey } = useContext(MusicalKeyContext);
+  const { musicalKey } = useMusicalKey();
   const [count, setCount] = useState(0);
 
   return (
