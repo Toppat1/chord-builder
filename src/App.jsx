@@ -6,6 +6,7 @@ import { useMusicalKey } from './contexts/MusicalKeyContext.jsx';
 import { KeyDisplay } from './components/KeyDisplay.jsx';
 import { KeyTonicPlayer } from './components/KeyTonicPlayer.jsx';
 import { KeyChanger } from './components/KeyChanger.jsx';
+import { ChordButton } from './components/ChordButton.jsx';
 
 function App() {
   const { musicalKey } = useMusicalKey();
@@ -25,11 +26,9 @@ function App() {
         }
       </div>
       <h1>
-        Vite + React = Bababooey. This is so sick. <br />
-        It's instant for the local site. <br />I just need to commit for the live site too. <br />
-        No more npm run build and deploy! :D
+        Chord Builder
       </h1>
-      <button></button>
+      <ChordButton chord={musicalKey.split(' ')[0]}/>
       <h1>
         Key is {musicalKey}. Key Letter is {musicalKey.split(' ')[0]}.
       </h1>
