@@ -29,6 +29,12 @@ function App() {
         Chord Builder
       </h1>
       <ChordButton chord={musicalKey.split(' ')[0]}/>
+      <ChordButton chord="C" />
+      <ChordButton chord="Cm" />
+      <ChordButton chord="Csus4" />
+      <ChordButton chord="Cmsus4" />
+      <ChordButton chord="Csus2" />
+      <ChordButton chord="Cmsus2" />
       <h1>
         Key is {musicalKey}. Key Letter is {musicalKey.split(' ')[0]}.
       </h1>

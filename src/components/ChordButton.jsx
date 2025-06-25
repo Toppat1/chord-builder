@@ -3,9 +3,11 @@ import { useSynth } from '../contexts/SynthContext';
 import * as Tone from 'tone';
 
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2'];
 
 export function ChordButton({ chord }) {
   const synth = useSynth();
+  const { musicalKey } = useMusicalKey();
   const type = notes.some(note => chord.includes(note.toUpperCase())) ? 'name' : 'numeral';
 
   // If numeral, convert to name type
@@ -14,7 +16,7 @@ export function ChordButton({ chord }) {
   // Determine modifiers: 7, maj9, sus2, etc.
   // Determine notes to play, including root note being the lowest-pitched
 
-  // Returns root note of chord, requires it to be the name type
+  // Return root note of chord, requires it to be the name type
   function findRoot(chord) {
     if (chord[1] == '#' || chord[1] == 'b') {
       return chord.substring(0, 2);
@@ -23,9 +25,22 @@ export function ChordButton({ chord }) {
     }
   }
 
-  // Determines if Major or Minor currently
+  // Determine if Major or Minor chord
   function determineTonality(chord) {
     return chord.includes('m') ? 'minor' : 'major';
+  }
+
+  // Determine modifier(s)
+  function getChordModifiers(chordName) {
+    let modifierList = [];
+    for (let modifier of modifiers) {
+      if (chordName.includes(modifier)) {
+        modifierList.push(modifier);
+      }
+    }
+
+    console.log(modifierList);
+    return modifierList;
   }
 
   // Assign octaves from 4 - Change if numerals
@@ -62,6 +77,18 @@ export function ChordButton({ chord }) {
         break;
     }
 
+    // Handle modifiers
+    for (let modifier of getChordModifiers(chord)) {
+      switch (modifier) {
+        case 'sus4':
+          triadSemitones[1] = 5;
+          break;
+        case 'sus2':
+          triadSemitones[1] = 2;
+          break;
+      }
+    }
+
     // Create an array of notes that are in the chord, in pitch order
     let noteNames = [];
     triadSemitones.forEach(semitone => {
@@ -79,7 +106,7 @@ export function ChordButton({ chord }) {
 
   return (
     <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))}>
-      Chord {chord} is of type '{type}.' Notes in it are {getNotes(chord)}
+      {chord} - modifiers are {getChordModifiers(chord)}
     </button>
   );
 }
