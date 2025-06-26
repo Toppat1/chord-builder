@@ -44,6 +44,18 @@ function App() {
       <h1>
         Key is {musicalKey}. Key Letter is {musicalKey.split(' ')[0]}.
       </h1>
+      <div>
+        <ChordButton chord="D#maj7" />
+        <ChordButton chord="D#m7" />
+        <ChordButton chord="Dm7" />
+        <ChordButton chord="C#maj7" />
+        <ChordButton chord="Cm7" />
+        <ChordButton chord="D7" />
+        <ChordButton chord="Gm7" />
+        <ChordButton chord="Fm7" />
+        <ChordButton chord="F" />
+        <ChordButton chord="A#" />
+      </div>
       <KeyDisplay />
       <KeyTonicPlayer />
       <KeyChanger />

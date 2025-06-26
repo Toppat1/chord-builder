@@ -137,5 +137,9 @@ export function ChordButton({ chord }) {
     synth.triggerAttackRelease(arrayNotes, '16n');
   }
 
-  return <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))}>{chord}</button>;
+  return (
+    <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))} style={{ width: '100px', height: '50px' }}>
+      {chord}
+    </button>
+  );
 }
