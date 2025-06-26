@@ -3,7 +3,7 @@ import { useSynth } from '../contexts/SynthContext';
 import * as Tone from 'tone';
 
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2'];
+const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5'];
 
 export function ChordButton({ chord }) {
   const synth = useSynth();
@@ -16,6 +16,10 @@ export function ChordButton({ chord }) {
   // Determine modifiers: 7, maj9, sus2, etc.
   // Determine notes to play, including root note being the lowest-pitched
 
+  function hasAccidental(chord) {
+    return chord[1] == '#' || chord[1] == 'b' ? true : false;
+  }
+
   // Return root note of chord, requires it to be the name type
   function findRoot(chord) {
     if (chord[1] == '#' || chord[1] == 'b') {
@@ -27,7 +31,15 @@ export function ChordButton({ chord }) {
 
   // Determine if Major or Minor chord
   function determineTonality(chord) {
-    return chord.includes('m') ? 'minor' : 'major';
+    if (chord.includes('aug')) {
+      return 'augmented';
+    } else {
+      if (hasAccidental(chord)) {
+        return (chord[2] == 'm') & (chord[3] != 'a') ? 'minor' : 'major';
+      } else {
+        return (chord[1] == 'm') & (chord[2] != 'a') ? 'minor' : 'major';
+      }
+    }
   }
 
   // Determine modifier(s)
@@ -35,7 +47,10 @@ export function ChordButton({ chord }) {
     let modifierList = [];
     for (let modifier of modifiers) {
       if (chordName.includes(modifier)) {
-        modifierList.push(modifier);
+        if ((modifier == '7') & (chordName[chordName.indexOf('7') - 1] == 'j') || (modifier == '6') & (chordName[chordName.indexOf('6') + 1] == 'o')) {
+        } else {
+          modifierList.push(modifier);
+        }
       }
     }
 
@@ -75,6 +90,9 @@ export function ChordButton({ chord }) {
       case 'minor':
         triadSemitones = [0, 3, 7];
         break;
+      case 'augmented':
+        triadSemitones = [0, 4, 8];
+        break;
     }
 
     // Handle modifiers
@@ -85,6 +103,21 @@ export function ChordButton({ chord }) {
           break;
         case 'sus2':
           triadSemitones[1] = 2;
+          break;
+        case 'octave':
+          triadSemitones.push(12);
+          break;
+        case 'maj7':
+          triadSemitones.push(11);
+          break;
+        case '7':
+          triadSemitones.push(10);
+          break;
+        case '6':
+          triadSemitones.push(9);
+          break;
+        case '6omit5':
+          triadSemitones[2] = 9;
           break;
       }
     }
@@ -104,9 +137,5 @@ export function ChordButton({ chord }) {
     synth.triggerAttackRelease(arrayNotes, '16n');
   }
 
-  return (
-    <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))}>
-      {chord} - modifiers are {getChordModifiers(chord)}
-    </button>
-  );
+  return <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))}>{chord}</button>;
 }
