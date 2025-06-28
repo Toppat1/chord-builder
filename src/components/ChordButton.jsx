@@ -4,6 +4,15 @@ import * as Tone from 'tone';
 
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
 const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5'];
+const numeralMappings = {
+  I: 0,
+  II: 2,
+  III: 4,
+  IV: 5,
+  V: 7,
+  VI: 9,
+  VII: 11,
+};
 
 export function ChordButton({ chord }) {
   const synth = useSynth();
@@ -15,6 +24,42 @@ export function ChordButton({ chord }) {
   // Determine chord type: Major, Minor, Diminished, Augmented
   // Determine modifiers: 7, maj9, sus2, etc.
   // Determine notes to play, including root note being the lowest-pitched
+
+  // Convert numeral to name chord type
+  // NEED TO HANDLE SHARP AND FLATS
+
+  // Return longest item in an array
+  function longestItem(arr) {
+    let longest = '';
+    for (const item of arr) {
+      if (item.length > longest.length) {
+        longest = item;
+      }
+    }
+    return longest;
+  }
+
+  function returnNumeral(chordNumeral) {
+    let matches = [];
+    for (const numeral in numeralMappings) {
+      if (chordNumeral.includes(numeral)) {
+        matches.push(numeral);
+      }
+    }
+    if (matches.length > 0) {
+      return longestItem(matches);
+    } else {
+      return null;
+    }
+  }
+
+  // If the chord is a numeral, replace it with its name counterpart
+  // KEEP EXTENSIONS LIKE m and sus4
+  chord =
+    chord.replace(
+      returnNumeral(chord),
+      notes[(notes.indexOf(musicalKey.split(' ')[0]) + numeralMappings[returnNumeral(chord)]) % 12]
+    ) ?? chord;
 
   function hasAccidental(chord) {
     return chord[1] == '#' || chord[1] == 'b' ? true : false;
@@ -45,9 +90,12 @@ export function ChordButton({ chord }) {
   // Determine modifier(s)
   function getChordModifiers(chordName) {
     let modifierList = [];
-    for (let modifier of modifiers) {
+    for (const modifier of modifiers) {
       if (chordName.includes(modifier)) {
-        if ((modifier == '7') & (chordName[chordName.indexOf('7') - 1] == 'j') || (modifier == '6') & (chordName[chordName.indexOf('6') + 1] == 'o')) {
+        if (
+          (modifier == '7') & (chordName[chordName.indexOf('7') - 1] == 'j') ||
+          (modifier == '6') & (chordName[chordName.indexOf('6') + 1] == 'o')
+        ) {
         } else {
           modifierList.push(modifier);
         }

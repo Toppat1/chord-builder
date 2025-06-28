@@ -25,36 +25,43 @@ function App() {
           //<img src={image} alt='alt-text' style={{width:'300px', height:'auto'}}/>
         }
       </div>
-      <h1>
-        Chord Builder
-      </h1>
-      <ChordButton chord={musicalKey.split(' ')[0]}/>
-      <ChordButton chord="C" />
-      <ChordButton chord="Cm" />
-      <ChordButton chord="Csus4" />
-      <ChordButton chord="Csus2" />
-      <ChordButton chord="Coctave" />
-      <ChordButton chord="Cmaj7" />
-      <ChordButton chord="C7" />
-      <ChordButton chord="Caug" />
-      <ChordButton chord="C6" />
-      <ChordButton chord="C6omit5" />
-      <ChordButton chord="Cm7" />
-      <ChordButton chord="Cmmaj7" />
+      <h1>Chord Builder</h1>
+      <ChordButton chord={musicalKey.split(' ')[0]} />
+      <ChordButton chord='C' />
+      <ChordButton chord='Cm' />
+      <ChordButton chord='Csus4' />
+      <ChordButton chord='Csus2' />
+      <ChordButton chord='Coctave' />
+      <ChordButton chord='Cmaj7' />
+      <ChordButton chord='C7' />
+      <ChordButton chord='Caug' />
+      <ChordButton chord='C6' />
+      <ChordButton chord='C6omit5' />
+      <ChordButton chord='Cm7' />
+      <ChordButton chord='Cmmaj7' />
+      <div>
+        <ChordButton chord='I' />
+        <ChordButton chord='II' />
+        <ChordButton chord='III' />
+        <ChordButton chord='IV' />
+        <ChordButton chord='V' />
+        <ChordButton chord='VI' />
+        <ChordButton chord='VII' />
+      </div>
       <h1>
         Key is {musicalKey}. Key Letter is {musicalKey.split(' ')[0]}.
       </h1>
       <div>
-        <ChordButton chord="D#maj7" />
-        <ChordButton chord="D#m7" />
-        <ChordButton chord="Dm7" />
-        <ChordButton chord="C#maj7" />
-        <ChordButton chord="Cm7" />
-        <ChordButton chord="D7" />
-        <ChordButton chord="Gm7" />
-        <ChordButton chord="Fm7" />
-        <ChordButton chord="F" />
-        <ChordButton chord="A#" />
+        <ChordButton chord='D#maj7' />
+        <ChordButton chord='D#m7' />
+        <ChordButton chord='Dm7' />
+        <ChordButton chord='C#maj7' />
+        <ChordButton chord='Cm7' />
+        <ChordButton chord='D7' />
+        <ChordButton chord='Gm7' />
+        <ChordButton chord='Fm7' />
+        <ChordButton chord='F' />
+        <ChordButton chord='A#' />
       </div>
       <KeyDisplay />
       <KeyTonicPlayer />
