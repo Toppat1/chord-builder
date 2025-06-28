@@ -55,6 +55,7 @@ export function ChordButton({ chord }) {
 
   // If the chord is a numeral, replace it with its name counterpart
   // KEEP EXTENSIONS LIKE m and sus4
+  const chordNumeral = chord;
   chord =
     chord.replace(
       returnNumeral(chord),
@@ -67,11 +68,7 @@ export function ChordButton({ chord }) {
 
   // Return root note of chord, requires it to be the name type
   function findRoot(chord) {
-    if (chord[1] == '#' || chord[1] == 'b') {
-      return chord.substring(0, 2);
-    } else {
-      return chord[0];
-    }
+    return hasAccidental(chord) ? chord.substring(0, 2) : chord[0];
   }
 
   // Determine if Major or Minor chord
@@ -101,8 +98,6 @@ export function ChordButton({ chord }) {
         }
       }
     }
-
-    console.log(modifierList);
     return modifierList;
   }
 
@@ -187,7 +182,7 @@ export function ChordButton({ chord }) {
 
   return (
     <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))} style={{ width: '100px', height: '50px' }}>
-      {chord}
+      {chord == chordNumeral ? chord : chordNumeral}
     </button>
   );
 }
