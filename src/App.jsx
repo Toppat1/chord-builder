@@ -49,11 +49,11 @@ function App() {
         <ChordButton chord='VII' />
       </div>
       <div>
-        <ChordButton chord='I' />
+        <ChordButton chord='Im' />
         <ChordButton chord='IIm' />
         <ChordButton chord='IIIm' />
-        <ChordButton chord='IV' />
-        <ChordButton chord='V' />
+        <ChordButton chord='IVm' />
+        <ChordButton chord='Vm' />
         <ChordButton chord='VIm' />
         <ChordButton chord='VIIdim' />
       </div>

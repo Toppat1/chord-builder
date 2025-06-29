@@ -75,6 +75,8 @@ export function ChordButton({ chord }) {
   function determineTonality(chord) {
     if (chord.includes('aug')) {
       return 'augmented';
+    } else if (chord.includes('dim')) {
+      return 'diminished';
     } else {
       if (hasAccidental(chord)) {
         return (chord[2] == 'm') & (chord[3] != 'a') ? 'minor' : 'major';
@@ -136,6 +138,9 @@ export function ChordButton({ chord }) {
       case 'augmented':
         triadSemitones = [0, 4, 8];
         break;
+      case 'diminished':
+        triadSemitones = [0, 3, 6];
+        break;
     }
 
     // Handle modifiers
@@ -181,8 +186,10 @@ export function ChordButton({ chord }) {
   }
 
   return (
-    <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))} style={{ width: '100px', height: '50px' }}>
+    <button onMouseDown={() => playChord(assignOctaves(getNotes(chord)))} style={{ width: '100px', height: '60px' }}>
       {chord == chordNumeral ? chord : chordNumeral}
+      <br />
+      {chord == chordNumeral ? null : chord}
     </button>
   );
 }
