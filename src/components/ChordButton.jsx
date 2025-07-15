@@ -3,7 +3,7 @@ import { useSynth } from '../contexts/SynthContext';
 import * as Tone from 'tone';
 
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5', 'b5'];
+const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5', 'b5', 'add9'];
 const numeralMappings = {
   I: 0,
   II: 2,
@@ -169,6 +169,12 @@ export function ChordButton({ chord }) {
           break;
         case 'b5':
           triadSemitones[2] = 6;
+          break;
+        case 'add9':
+          triadSemitones.push(14)
+          break;
+        case 'add2':
+          triadSemitones.splice(1, 0, 2)
           break;
       }
     }
