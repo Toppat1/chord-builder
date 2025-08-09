@@ -42,6 +42,8 @@ function App() {
       <ChordButton chord='C#m7b5' />
       <ChordButton chord='Cadd2' />
       <ChordButton chord='Cadd9' />
+      <ChordButton chord='Cmaj9' />
+      <ChordButton chord='C9' />
       <div>
         <ChordButton chord='I' />
         <ChordButton chord='II' />
@@ -104,6 +106,24 @@ function App() {
         <ChordButton chord='Vadd9' />
         <ChordButton chord='VIadd9' />
         <ChordButton chord='VIIadd9' />
+      </div>
+      <div>
+        <ChordButton chord='Imaj9' />
+        <ChordButton chord='IImaj9' />
+        <ChordButton chord='IIImaj9' />
+        <ChordButton chord='IVmaj9' />
+        <ChordButton chord='Vmaj9' />
+        <ChordButton chord='VImaj9' />
+        <ChordButton chord='VIImaj9' />
+      </div>
+      <div>
+        <ChordButton chord='I9' />
+        <ChordButton chord='II9' />
+        <ChordButton chord='III9' />
+        <ChordButton chord='IV9' />
+        <ChordButton chord='V9' />
+        <ChordButton chord='VI9' />
+        <ChordButton chord='VII9' />
       </div>
       <h1>
         Key is {musicalKey}. Key Letter is {musicalKey.split(' ')[0]}.

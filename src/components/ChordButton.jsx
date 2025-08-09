@@ -3,7 +3,7 @@ import { useSynth } from '../contexts/SynthContext';
 import * as Tone from 'tone';
 
 const notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
-const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5', 'b5', 'add9'];
+const modifiers = ['sus4', 'sus2', '7', 'maj7', 'add2', 'octave', '6', '6omit5', 'b5', 'add9', 'maj9', '9'];
 const numeralMappings = {
   I: 0,
   II: 2,
@@ -91,9 +91,11 @@ export function ChordButton({ chord }) {
     let modifierList = [];
     for (const modifier of modifiers) {
       if (chordName.includes(modifier)) {
+        // Ensure similar modifiers are detected correctly, e.g. "maj7" which includes string "7", and "7" is dominant 7th
         if (
           (modifier == '7') & (chordName[chordName.indexOf('7') - 1] == 'j') ||
-          (modifier == '6') & (chordName[chordName.indexOf('6') + 1] == 'o')
+          (modifier == '6') & (chordName[chordName.indexOf('6') + 1] == 'o') ||
+          (modifier == '9') & ((chordName[chordName.indexOf('9') - 1] == 'j') ||(chordName[chordName.indexOf('9') - 1] == 'd'))
         ) {
         } else {
           modifierList.push(modifier);
@@ -105,7 +107,7 @@ export function ChordButton({ chord }) {
 
   // Assign octaves from 4 - Change if numerals
   function assignOctaves(arrayNotes) {
-    let octave = 4;
+    let octave = 3; // Default root rote octave number
     let lastIndex = notes.indexOf(arrayNotes[0]);
 
     return arrayNotes.map((note, index) => {
@@ -175,6 +177,12 @@ export function ChordButton({ chord }) {
           break;
         case 'add2':
           triadSemitones.splice(1, 0, 2)
+          break;
+        case 'maj9':
+          triadSemitones.push(11, 14)
+          break;
+        case '9':
+          triadSemitones.push(10, 14)
           break;
       }
     }
